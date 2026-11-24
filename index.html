@@ -17,7 +17,7 @@
   --g3: #a3a3a3;
   --w: #e6e6e6;
   --sans: 'Inter', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
-  /* Paste your complete base64 string or an image path here */
+  /* Paste your complete base64 string or image URL here */
   --bg: none;
 }
 
@@ -61,7 +61,7 @@ html, body {
 .hero .haze {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 50% 30%, rgba(16, 16, 16, 0.35), rgba(7, 7, 7, 0.88));
+  background: radial-gradient(circle at 50% 30%, rgba(16, 16, 16, 0.35), rgba(7, 7, 7, 0.9));
   z-index: 1;
 }
 
@@ -75,6 +75,7 @@ html, body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 3rem;
 }
 
 .nav {
@@ -82,7 +83,7 @@ html, body {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   letter-spacing: 0.08em;
 }
 
@@ -100,32 +101,62 @@ html, body {
   color: var(--w);
 }
 
-/* Places ILLUSTRATOR and links on row 1, and .glass below on row 2 */
+/* Top row: ILLUSTRATOR + glass card stacked on left, WORK / ABOUT / CONTACT on right */
 .hrow {
   display: grid;
   grid-template-columns: 1fr auto;
-  align-items: baseline;
-  row-gap: 2.5rem;
-  column-gap: 1.5rem;
-  margin-top: auto;
+  align-items: start;
+  gap: 1.5rem;
+}
+
+.hleft {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
 }
 
 .hrow .big {
-  grid-column: 1;
-  grid-row: 1;
   margin: 0;
-  font-size: clamp(2rem, 5vw, 4rem);
-  font-weight: 300;
-  letter-spacing: 0.04em;
+  font-size: clamp(2rem, 4.5vw, 3.5rem);
+  font-weight: 200;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.glass {
+  max-width: 320px;
+  padding: 1rem 1.15rem;
+  background: rgba(27, 27, 27, 0.68);
+  border: 1px solid rgba(230, 230, 230, 0.14);
+  backdrop-filter: blur(12px);
+  border-radius: 6px;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: var(--g3);
+}
+
+.glass small {
+  display: block;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  color: var(--g2);
+  margin-bottom: 0.4rem;
+}
+
+.glass b {
+  display: block;
+  color: var(--w);
+  font-weight: 500;
+  margin-bottom: 0.3rem;
 }
 
 .hrow .hl {
-  grid-column: 2;
-  grid-row: 1;
   display: flex;
   gap: 1.25rem;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   letter-spacing: 0.08em;
+  padding-top: 0.5rem;
 }
 
 .hrow .hl a {
@@ -140,52 +171,76 @@ html, body {
   text-underline-offset: 4px;
 }
 
-.hrow .glass {
-  grid-column: 1 / -1;
-  grid-row: 2;
-  justify-self: center;
-  max-width: 360px;
-  padding: 1rem 1.25rem;
-  background: rgba(27, 27, 27, 0.72);
-  border: 1px solid rgba(230, 230, 230, 0.14);
-  backdrop-filter: blur(12px);
-  border-radius: 6px;
-  font-size: 0.85rem;
-  line-height: 1.45;
+/* Middle metadata strip */
+.meta-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+  color: var(--g2);
+}
+
+.meta-strip .top-line {
   color: var(--g3);
 }
 
-.hrow .glass small {
-  display: block;
-  font-size: 0.65rem;
+.meta-strip .align-right {
+  text-align: right;
+}
+
+/* Lower display statements */
+.lower-lockup {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.display-left {
+  margin: 0;
+  font-size: clamp(2rem, 4.5vw, 3.4rem);
+  font-weight: 200;
+  letter-spacing: 0.05em;
+  line-height: 1.05;
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 0.35rem;
+}
+
+.display-left .sup-yr {
+  font-size: 0.72rem;
   letter-spacing: 0.08em;
-  color: var(--g2);
-  margin-bottom: 0.35rem;
+  color: var(--g3);
+  margin-top: 0.25rem;
 }
 
-.hrow .glass b {
-  display: block;
-  color: var(--w);
-  font-weight: 500;
-  margin-bottom: 0.25rem;
+.display-right {
+  margin: 0;
+  align-self: flex-end;
+  text-align: right;
+  font-size: clamp(2rem, 4.5vw, 3.4rem);
+  font-weight: 200;
+  letter-spacing: 0.05em;
+  line-height: 1.1;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 720px) {
   .hrow {
     grid-template-columns: 1fr;
-    row-gap: 1.5rem;
   }
 
-  .hrow .hl {
-    grid-column: 1;
-    grid-row: 2;
+  .meta-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .hrow .glass {
-    grid-column: 1;
-    grid-row: 3;
-    justify-self: stretch;
-    max-width: none;
+  .meta-strip .align-right {
+    text-align: left;
+  }
+
+  .display-right {
+    align-self: flex-start;
+    text-align: left;
   }
 }
 </style>
@@ -206,19 +261,51 @@ html, body {
         <a href="#contact">contact <span class="grid-i"><i></i><i></i><i></i><i></i></span></a>
       </div>
     </nav>
+
     <div class="lg main" role="img" aria-label="hateyieo"></div>
+
     <div class="hrow">
-      <h1 class="big">Illustrator</h1>
-      <div class="glass">
-        <small class="up">hateyieo / illustrator</small>
-        <b>Chrome, thorns &amp; static</b>
-        Illustration, posters, type and cover art in an underground rap style: chrome, thorns and a little nostalgia.
+      <div class="hleft">
+        <h1 class="big">Illustrator</h1>
+        <div class="glass">
+          <small class="up">hateyieo / illustrator</small>
+          <b>Chrome, thorns &amp; static</b>
+          Illustration, posters, type and cover art in an underground rap style: chrome, thorns and a little nostalgia.
+        </div>
       </div>
+
       <div class="hl up">
         <a class="on" href="#work">work</a>
         <a href="#about">about</a>
         <a href="#contact">contact</a>
       </div>
+    </div>
+
+    <div class="meta-strip up">
+      <div>
+        <div class="top-line">/. EXPLORE</div>
+        <div>LATEST WORK</div>
+      </div>
+      <div>
+        <div class="top-line">001</div>
+        <div>CHROME + STATIC</div>
+      </div>
+      <div>
+        <div class="top-line">MODEL: HY</div>
+        <div>2026 EDITION</div>
+      </div>
+      <div class="align-right">
+        <div class="top-line">VIEW · PROFILE</div>
+        <div>MEET</div>
+      </div>
+    </div>
+
+    <div class="lower-lockup">
+      <p class="display-left up">
+        <span>trompe l'oeil</span>
+        <span class="sup-yr">2026</span>
+      </p>
+      <p class="display-right up">ALL OR NOTHING</p>
     </div>
   </div>
 </header>
